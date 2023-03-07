@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="662c6372-d2c3-4ca0-89e4-f5b03e13937d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Prism.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Figure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Figure.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Prism.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Prism.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +57,10 @@
       <option name="presentableId" value="Default" />
       <updated>1677740707886</updated>
       <workItem from="1677740709588" duration="2446000" />
-      <workItem from="1677765620693" duration="6911000" />
+      <workItem from="1677765620693" duration="7485000" />
+      <workItem from="1677857868221" duration="8000" />
+      <workItem from="1678114711205" duration="229000" />
+      <workItem from="1678174823769" duration="3364000" />
     </task>
     <servers />
   </component>

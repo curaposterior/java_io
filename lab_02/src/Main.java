@@ -28,7 +28,7 @@ class TakeData {
                 case 1 -> runTriangle();
                 case 2 -> runSquare();
                 case 3 -> runCircle();
-                case 4 -> runCube();
+                case 4 -> runPrism();
                 default -> { break;}
             }
             System.out.println("-----------------------------------------");
@@ -61,18 +61,49 @@ class TakeData {
         System.out.printf("Information:\n");
         cr.print();
     }
-    private void runCube() {
-        System.out.println("Enter the side of the regular hexahedron:");
-        double a;
-        a = scanner.nextInt();
-        Prism pr = new Prism(a);
-        System.out.printf("Information:\n");
-        pr.print();
+    private void runPrism() {
+        System.out.println("Select the base of the regular prism:");
+        System.out.println("1. Square");
+        System.out.println("2. Triangle");
+
+
+        int opt;
+
+        try {
+            opt = scanner.nextInt();
+            if (opt == 1) {
+                System.out.println("Enter square side and height of the prism:");
+
+                double a = scanner.nextDouble();
+                double h = scanner.nextDouble();
+                var square = new Square(a);
+                var cube = new PrismFigure(square, h);
+
+                System.out.printf("Information:\n");
+                square.print();
+                cube.print();
+            }
+            if (opt == 2) {
+                System.out.println("Enter triangle side and height of the prism:");
+                double a, h;
+                a = scanner.nextDouble();
+                h = scanner.nextDouble();
+                var triangle = new Triangle(a,a,a);
+                var cube = new PrismFigure(triangle, h);
+
+                System.out.printf("Information:\n");
+                triangle.print();
+                cube.print();
+            }
+        }
+        catch (InputMismatchException ex) {
+            System.out.println("Wrong option, try again.");
+        }
     }
 }
 public class Main {
     public static void main(String[] args) {
-        TakeData obj = new TakeData();
+        var obj = new TakeData();
         obj.menu();
     }
 }
