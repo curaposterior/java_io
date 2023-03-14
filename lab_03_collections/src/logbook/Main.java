@@ -2,8 +2,18 @@ package logbook;
 
 public class Main {
     public static void main(String[] args) {
-        var stud = new Student("John", "debil", StudentCondition.ABSENT, 1999, 200);
-        var stud2 = new Student("John", "debil", StudentCondition.SICK, 2002, 440);
-        
+        Class klasa = new Class();
+        klasa.maxNumOfStudents = 10;
+        var stud = new Student("John", "Krasinksi", StudentCondition.SICK,
+                1200, 23);
+        klasa.addStudent(new Student("John", "Krasinksi", StudentCondition.SICK,
+                1200, 23));
+        klasa.addStudent(new Student("John", "Krasinksi", StudentCondition.SICK,
+                1200, 23));
+
+
+        klasa.summary();
+        klasa.changeCondition(stud, StudentCondition.MAKINGUP);
+        klasa.summary();
     }
 }
