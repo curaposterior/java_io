@@ -64,5 +64,5 @@ public class Student implements Comparable<Student> {
 
     public String getSurname() {
         return surname;
-    }
+    } 
 }

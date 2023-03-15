@@ -8,6 +8,15 @@ public class Class {
     ArrayList<Student> studentList = new ArrayList<Student>();
     int maxNumOfStudents;
 
+    public ArrayList<Student> getStudentList() {
+        return studentList;
+    }
+
+    public Class(String groupName, int maxNumOfStudents) {
+        this.maxNumOfStudents = maxNumOfStudents;
+        this.groupName = groupName;
+    }
+
     void addStudent(Student student) {
         if (this.studentList.contains(student)) {
             System.out.println("Student is already in the group.");
@@ -74,7 +83,7 @@ public class Class {
 
     int countByCondition(StudentCondition condition) {
         return 0;
-    }
+    } //TODO: dodac metode countByCondition zliczajaca ilosc osob o danym stanie
 
     void summary() {
         System.out.println("Information about class:\n");
@@ -83,18 +92,18 @@ public class Class {
             System.out.println();
         }
     }
-//
+
     ArrayList<Student> sortByName() {
         ArrayList<Student> list = new ArrayList<Student>();
 
-        return list;
+        return list; //TODO: dodac sortowanie po nazwisku
     }
 
     ArrayList<Student> sortByPoints() {
         ArrayList<Student> list = new ArrayList<Student>();
 
-        return list;
+        return list; //TODO: dodac sortowanie po punktach
     }
 
-    //max
+    //TODO: dodac metode max
 }
