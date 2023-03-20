@@ -4,10 +4,10 @@ import java.util.Comparator;
 import java.util.Objects;
 
 public class Student implements Comparable<Student> {
-    private String name;
-    private String surname;
+    private final String name;
+    private final String surname;
     private StudentCondition condition;
-    private int yearOfBirth;
+    private final int yearOfBirth;
     private double points;
     //date of birth?
 
@@ -21,7 +21,7 @@ public class Student implements Comparable<Student> {
     }
 
     void print() {
-        System.out.println("Information about student:");
+        System.out.println("Information about the student:");
         System.out.println("Full name: " + name + " " + surname);
         System.out.println("Student condition: " + condition);
         System.out.println("Year of birth: " + yearOfBirth);
@@ -38,7 +38,10 @@ public class Student implements Comparable<Student> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return yearOfBirth == student.yearOfBirth && Double.compare(student.points, points) == 0 && Objects.equals(name, student.name) && Objects.equals(surname, student.surname) && condition == student.condition;
+        return yearOfBirth == student.yearOfBirth && Double.compare(student.points, points) == 0
+                && Objects.equals(name, student.name)
+                && Objects.equals(surname, student.surname)
+                && condition == student.condition;
     }
 
     @Override
@@ -65,4 +68,11 @@ public class Student implements Comparable<Student> {
     public String getSurname() {
         return surname;
     } 
+}
+
+class StudentPointsComparator implements Comparator<Student> {
+    @Override
+    public int compare(Student st1, Student st2) {
+        return Double.compare(st1.getPoints(), st2.getPoints());
+    }
 }

@@ -1,7 +1,7 @@
 package logbook;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Class {
     String groupName;
@@ -82,28 +82,41 @@ public class Class {
     }
 
     int countByCondition(StudentCondition condition) {
-        return 0;
-    } //TODO: dodac metode countByCondition zliczajaca ilosc osob o danym stanie
+        int counter = 0;
+        for (Student st: this.studentList) {
+            if (st.getCondition().equals(condition)) {
+                counter = counter + 1;
+            }
+        }
+        return counter;
+    }
 
     void summary() {
-        System.out.println("Information about class:\n");
-        for (Student st: this.studentList) {
-            st.print();
-            System.out.println();
+        if (this.studentList.size() == 0) {
+            System.out.println("Class is empty.");
+        }
+        else {
+            System.out.println("Information about class:\n");
+            for (Student st : this.studentList) {
+                st.print();
+                System.out.println();
+            }
         }
     }
 
     ArrayList<Student> sortByName() {
-        ArrayList<Student> list = new ArrayList<Student>();
-
-        return list; //TODO: dodac sortowanie po nazwisku
+        ArrayList<Student> list = (ArrayList<Student>) this.studentList.clone();
+        Collections.sort(list);
+        return list;
     }
 
-    ArrayList<Student> sortByPoints() {
-        ArrayList<Student> list = new ArrayList<Student>();
-
-        return list; //TODO: dodac sortowanie po punktach
+    ArrayList<Student> sortByPoints(ArrayList<Student> studList) {
+        ArrayList<Student> arr = (ArrayList<Student>) studList.clone();
+        arr.sort(new StudentPointsComparator());
+        return arr;
     }
 
-    //TODO: dodac metode max
+    public Student max() {
+        return Collections.max(this.studentList, new StudentPointsComparator());
+    }
 }

@@ -34,10 +34,18 @@ public class ClassContainer {
     }
 
     public void summary() {
-        System.out.println("Information about groups:");
+        System.out.println("Information about the groups:");
         for (var entry: this.groups.entrySet()) {
             int percentage = entry.getValue().studentList.size() / entry.getValue().maxNumOfStudents * 100;
             System.out.println(entry.getKey() + ", group percentage: " +  percentage);
         }
+    }
+
+    public Class get(String grName) {
+        return this.groups.get(grName);
+    }
+
+    public void addStudent(String grName, Student student) {
+        this.groups.get(grName).addStudent(student);
     }
 }
