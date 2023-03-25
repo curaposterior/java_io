@@ -39,7 +39,7 @@ public class Class {
         }
     }
 
-    Student getStudent(Student student) { //TODO: dowiedziec sie ocb z ta metoda
+    Student getStudent(Student student) {
         return this.studentList.get(0);
     }
 

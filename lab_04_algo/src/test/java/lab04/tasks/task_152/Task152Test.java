@@ -20,7 +20,7 @@ class Task152Test {
         ArrayList<Integer> nums = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4));
         ArrayList<Double> probs = new ArrayList<Double>(Arrays.asList(0.1, 0.5, 0.2, 0.2));
         ArrayList<Integer> generatedNums = new ArrayList<Integer>();
-        DecimalFormat df = new DecimalFormat("#.#");
+//        DecimalFormat df = new DecimalFormat("#.#");
 
         Task152 cls = new Task152(nums, probs);
 
