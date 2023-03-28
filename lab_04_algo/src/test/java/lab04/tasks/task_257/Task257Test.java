@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class Task257Test {
+public class Task257Test {
 
     @Test
     void boundsOfSmallestWindowToSort1() {

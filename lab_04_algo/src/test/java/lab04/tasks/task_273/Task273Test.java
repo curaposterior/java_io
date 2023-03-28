@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class Task273Test {
+public class Task273Test {
 
     @Test
     void fixedPoint1() {

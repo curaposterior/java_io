@@ -9,8 +9,8 @@ import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class Task152Test {
-    private static double round (double value, int precision) {
+public class Task152Test {
+    public static double round (double value, int precision) {
         int scale = (int) Math.pow(10, precision);
         return (double) Math.round(value * scale) / scale;
     }
@@ -20,7 +20,6 @@ class Task152Test {
         ArrayList<Integer> nums = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4));
         ArrayList<Double> probs = new ArrayList<Double>(Arrays.asList(0.1, 0.5, 0.2, 0.2));
         ArrayList<Integer> generatedNums = new ArrayList<Integer>();
-//        DecimalFormat df = new DecimalFormat("#.#");
 
         Task152 cls = new Task152(nums, probs);
 

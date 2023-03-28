@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class Task248Test {
+public class Task248Test {
 
     @Test
     void max1() {

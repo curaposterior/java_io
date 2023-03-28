@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class Task249Test {
+public class Task249Test {
 
     @Test
     void findMaxXOR1() {
