@@ -1,4 +1,3 @@
-package logbook;
 
 import java.util.Comparator;
 import java.util.Objects;
@@ -9,8 +8,6 @@ public class Student implements Comparable<Student> {
     private StudentCondition condition;
     private final int yearOfBirth;
     private double points;
-    //date of birth?
-
 
     public Student(String name, String surname, StudentCondition condition, int yearOfBirth, double points) {
         this.name = name;
@@ -50,7 +47,7 @@ public class Student implements Comparable<Student> {
     }
 
     public void setPoints(double points) {
-        this.points += points;
+        this.points = points;
     }
 
     public double getPoints() {
@@ -67,17 +64,18 @@ public class Student implements Comparable<Student> {
 
     public String getSurname() {
         return surname;
-    }
-
+    } 
+    
     @Override
     public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", condition=" + condition +
-                ", yearOfBirth=" + yearOfBirth +
-                ", points=" + points +
-                '}';
+//        return "Student{" +
+//                "name='" + name + '\'' +
+//                ", surname='" + surname + '\'' +
+//                ", condition=" + condition +
+//                ", yearOfBirth=" + yearOfBirth +
+//                ", points=" + points +
+//                '}';
+    	return name + "/" + surname + "/"  + condition + "/" + points;
     }
 }
 

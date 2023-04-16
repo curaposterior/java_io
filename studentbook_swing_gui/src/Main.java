@@ -1,4 +1,3 @@
-package logbook;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -8,7 +7,7 @@ public class Main {
         /* Prezentacja funkcjonalnosci klasy Class oraz Student */
         Class klasa = new Class("GC13", 20);
         klasa.maxNumOfStudents = 10;
-        var stud = new Student("John", "Elton", StudentCondition.SICK,
+        Student stud = new Student("John", "Elton", StudentCondition.SICK,
                 1200, 234);
         klasa.addStudent(new Student("Pablo", "Essc", StudentCondition.ABSENT,
                 1000, 10));
@@ -21,14 +20,14 @@ public class Main {
         System.out.println("Sick students: " + klasa.countByCondition(StudentCondition.SICK));
 
         System.out.println("First sorting, by surname:\n");
-        var sortedClass = klasa.sortByName(); //arraylist
+        ArrayList<Student> sortedClass = klasa.sortByName(); //arraylist
         for (Student st: sortedClass) {
             st.print();
             System.out.println();
         }
 
         System.out.println("Second sorting, by points:\n");
-        var sortedClassPoints = klasa.sortByPoints(klasa.studentList); //arraylist
+        ArrayList<Student> sortedClassPoints = klasa.sortByPoints(klasa.studentList); //arraylist
         for (Student st: sortedClassPoints) {
             st.print();
             System.out.println();
@@ -64,6 +63,6 @@ public class Main {
         }
 
         groups.summary();
-        System.out.println(groups);
+
     }
 }

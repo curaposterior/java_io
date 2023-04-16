@@ -1,4 +1,3 @@
-package logbook;
 
 import java.lang.reflect.Array;
 import java.util.*;
@@ -11,7 +10,19 @@ public class Class {
     public ArrayList<Student> getStudentList() {
         return studentList;
     }
-
+    
+    public String getGroupName() {
+    	return groupName;
+    }
+    
+    public void setMaxStudents(int newMax) {
+    	this.maxNumOfStudents = newMax;
+    }
+    
+    public void setStudentPoints(Student student, double points) {
+    	student.setPoints(points);
+    }
+    
     public Class(String groupName, int maxNumOfStudents) {
         this.maxNumOfStudents = maxNumOfStudents;
         this.groupName = groupName;
@@ -119,7 +130,7 @@ public class Class {
     public Student max() {
         return Collections.max(this.studentList, new StudentPointsComparator());
     }
-
+    
     @Override
     public String toString() {
         return "Class{" +

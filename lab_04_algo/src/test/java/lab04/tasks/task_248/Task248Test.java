@@ -1,12 +1,14 @@
 package lab04.tasks.task_248;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Task248Test {
 
     @Test
+    @Timeout(1)
     void max1() {
         assertEquals(2, new Task248().max(1, 2));
     }

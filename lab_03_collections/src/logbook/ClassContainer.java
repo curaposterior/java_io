@@ -49,4 +49,11 @@ public class ClassContainer {
     public void addStudent(String grName, Student student) {
         this.groups.get(grName).addStudent(student);
     }
+
+    @Override
+    public String toString() {
+        return "ClassContainer{" +
+                "groups=" + groups +
+                '}';
+    }
 }
