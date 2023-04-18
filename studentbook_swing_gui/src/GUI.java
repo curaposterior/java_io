@@ -4,10 +4,12 @@ import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +23,7 @@ import javax.swing.ScrollPaneConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JToolBar;
+import javax.swing.JTable;
 
 
 public class GUI extends JFrame {
@@ -51,35 +54,13 @@ public class GUI extends JFrame {
 	private JTextField textFieldEditStudentPoints;
 	private JTextField textField;
 	private JLabel lblNewLabel_13;
+	private JTable table;
+	private JFrame fr;
 	
 	public GUI() {
 		getContentPane().setLayout(null);
 		
 		JButton btnAddStudent = new JButton("Dodaj");
-		btnAddStudent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (currClass != null) {
-					StudentCondition condition = StudentCondition.PRESENT;
-					//check specified condition:
-					if (textFieldStudentStatus.getText().equals("CHORY")) {
-						condition = StudentCondition.SICK;
-					}
-					else if (textFieldStudentStatus.getText().equals("NIEOBECNY")) {
-						condition  = StudentCondition.ABSENT;
-					}
-					else if (textFieldStudentStatus.getText().equals("ODRABIAJACY")) {
-						condition = StudentCondition.MAKINGUP;
-					}
-					//create new student
-					Student newStud = new Student(textFieldName.getText(), textFieldSurname.getText(),
-							condition, Integer.parseInt(textFieldBirthDate.getText()), 0.0);
-					currClass.addStudent(newStud);
-					loadStudents(currClass.getGroupName());
-				}
-			}
-		});
-		
-		
 		btnAddStudent.setBounds(29, 617, 89, 23);
 		getContentPane().add(btnAddStudent);
 		
@@ -156,15 +137,54 @@ public class GUI extends JFrame {
 		textFieldMaxNumberOfStudents.setBounds(265, 526, 86, 20);
 		getContentPane().add(textFieldMaxNumberOfStudents);
 		textFieldMaxNumberOfStudents.setColumns(10);
+		btnAddStudent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (currClass != null) {
+					StudentCondition condition = StudentCondition.PRESENT;
+					//check specified condition:
+					if (textFieldStudentStatus.getText().equals("CHORY")) {
+						condition = StudentCondition.SICK;
+					}
+					else if (textFieldStudentStatus.getText().equals("NIEOBECNY")) {
+						condition  = StudentCondition.ABSENT;
+					}
+					else if (textFieldStudentStatus.getText().equals("ODRABIAJACY")) {
+						condition = StudentCondition.MAKINGUP;
+					}
+					//create new student
+					try {
+					Student newStud = new Student(textFieldName.getText(), textFieldSurname.getText(),
+							condition, Integer.parseInt(textFieldBirthDate.getText()), 0.0);
+					currClass.addStudent(newStud);
+					loadStudents(currClass.getGroupName());
+					} catch (final NumberFormatException ex) {
+						JOptionPane.showMessageDialog(fr, "Złe dane w polu rok urodzenia", "Invalid data", JOptionPane.ERROR_MESSAGE);
+						System.err.println(ex.getMessage());
+					}
+					
+				}
+			}
+		});
+		
+		
+		
 		
 		JButton btnAddGroup = new JButton("Dodaj");
 		btnAddGroup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultListModel list = new DefaultListModel();
+				if (textFieldGroupName.getText().equals("")) {
+					JOptionPane.showMessageDialog(fr, "Złe dane w polu nazwa grupy", "Invalid data", JOptionPane.ERROR_MESSAGE);
+					System.err.println("Group name is empty");
+				}
+				
 				try {
 					book.addClass(textFieldGroupName.getText(), 
 							      Integer.parseInt(textFieldMaxNumberOfStudents.getText()));
-				} catch (final NumberFormatException ex) {System.err.println(ex.getMessage());}
+				} catch (final NumberFormatException ex) {
+					JOptionPane.showMessageDialog(fr, "Złe dane w polu liczebność", "Invalid data", JOptionPane.ERROR_MESSAGE);
+					System.err.println(ex.getMessage());
+				}
 				reload();
 			}
 		});
@@ -183,6 +203,9 @@ public class GUI extends JFrame {
 				if (currClass != null) {
 					renderStudents(currClass.sortByName());
 				}
+				else {
+					JOptionPane.showMessageDialog(fr, "Nie wybrano grupy", "Invalid data", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		
@@ -196,6 +219,8 @@ public class GUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (currClass != null) {
 					renderStudents(currClass.sortByPoints(currClass.getStudentList()));
+				} else {
+					JOptionPane.showMessageDialog(fr, "Nie wybrano grupy", "Invalid data", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -298,8 +323,12 @@ public class GUI extends JFrame {
 		JButton btnStudentMax = new JButton("Student z max pkt");
 		btnStudentMax.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				if (currClass != null) {
 					renderStudents(Arrays.asList(currClass.max()));
+				}
+				else {
+					JOptionPane.showMessageDialog(fr, "Wybierz studenta", "Invalid data", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -370,6 +399,10 @@ public class GUI extends JFrame {
 		lblNewLabel_13.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_13.setBounds(214, 296, 122, 14);
 		getContentPane().add(lblNewLabel_13);
+		
+		table = new JTable();
+		table.setBounds(147, 416, 34, -10);
+		getContentPane().add(table);
 	}
 	
 	
