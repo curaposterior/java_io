@@ -1,4 +1,4 @@
 ## Student management GUI
 
 GUI:
-![]('img/st_book.png')
+![]('img/st_screen.png')
