@@ -1,27 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studentbook.studentbookgui.MainScene">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studentbook.studentbookgui.LoginController">
    <children>
-      <Pane layoutX="1.0" layoutY="2.0" prefHeight="400.0" prefWidth="600.0">
-         <children>
-            <Label alignment="CENTER" layoutX="205.0" layoutY="14.0" prefHeight="66.0" prefWidth="190.0" text="Wirtualny dziekanat">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Label>
-            <Button layoutX="14.0" layoutY="354.0" mnemonicParsing="false" onAction="#switchToScene1" prefHeight="25.0" prefWidth="85.0" text="Scene 1" />
-            <Button layoutX="120.0" layoutY="354.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="25.0" prefWidth="85.0" text="Scene 2" />
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="200.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@xd_dziekanat.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Login">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="606.0">
+                     <children>
+                        <RadioButton fx:id="radioBntStudent" layoutX="122.0" layoutY="32.0" mnemonicParsing="false" text="Student">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="tg" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton fx:id="radioBtnTeacher" layoutX="257.0" layoutY="32.0" mnemonicParsing="false" text="Prowadzący" toggleGroup="$tg" />
+                        <TextField layoutX="183.0" layoutY="121.0" promptText="Login" />
+                        <PasswordField layoutX="183.0" layoutY="186.0" promptText="Hasło" />
+                        <Button fx:id="btnLogin" layoutX="186.0" layoutY="253.0" mnemonicParsing="false" onAction="#switchToScene1" prefHeight="25.0" prefWidth="147.0" text="Zaloguj się" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Register">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="174.0" layoutY="111.0" prefHeight="150.0" prefWidth="253.0" text="W budowie">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
    </children>
-</AnchorPane>
+</StackPane>

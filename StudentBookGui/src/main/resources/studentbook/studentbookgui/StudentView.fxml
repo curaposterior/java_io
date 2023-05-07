@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="812.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studentbook.studentbookgui.StudentController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <top>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label prefHeight="100.0" prefWidth="101.0" text="Widok studenta&#10;" />
+                  <AnchorPane prefHeight="100.0" prefWidth="737.0">
+                     <children>
+                        <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="87.0" text="Zmień dane" />
+                        <Button layoutX="617.0" layoutY="13.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="87.0" text="Wyloguj się" textFill="#bf8f44" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+         </top>
+         <left>
+            <TableView prefHeight="416.0" prefWidth="225.0" BorderPane.alignment="CENTER">
+               <columns>
+                  <TableColumn prefWidth="107.0" text="przedmiot" />
+                  <TableColumn prefWidth="117.0" text="oceny" />
+               </columns>
+            </TableView>
+         </left>
+         <right>
+            <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </right>
+         <center>
+            <AnchorPane prefHeight="416.0" prefWidth="417.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button layoutX="14.0" layoutY="12.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="87.0" text="Zapisz się" />
+                  <Button layoutX="14.0" layoutY="87.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="87.0" text="Wypisz się" />
+                  <Button layoutX="286.0" layoutY="12.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="87.0" text="Zmień grupę" />
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</StackPane>
