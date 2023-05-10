@@ -1,5 +1,6 @@
 package studentbook.studentbookgui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,14 @@ public class ClassContainer {
 
     public Map<String, Class> getGroups() {
         return groups;
+    }
+
+    public List<Class> getGroupsArray() {
+        List<Class> l = new ArrayList<Class>();
+        for (Class cl: groups.values()) {
+            l.add(cl);
+        }
+        return l;
     }
 
     public void setGroups(Map<String, Class> groups) {
@@ -82,8 +91,18 @@ public class ClassContainer {
         return this.groups.get(grName);
     }
 
-    public void addStudent(String grName, Student student) {
+    public void addStudent(String grName, Student student) throws IOException {
         this.groups.get(grName).addStudent(student);
+    }
+
+    public List<Class> searchClasses(String name) {
+        List<Class> to_ret = new ArrayList<Class>();
+        for (Class sr_class: groups.values()) {
+            if (sr_class.getGroupName().contains(name)) {
+                to_ret.add(sr_class);
+            }
+        }
+        return to_ret;
     }
 
     @Override

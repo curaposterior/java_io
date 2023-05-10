@@ -1,7 +1,9 @@
 package studentbook.studentbookgui;
 
-import java.lang.reflect.Array;
+import java.io.IOException;
 import java.util.*;
+
+import static studentbook.studentbookgui.StartApplication.main_class;
 
 public class Class {
     String groupName;
@@ -20,36 +22,48 @@ public class Class {
     	this.maxNumOfStudents = newMax;
     }
     
-    public void setStudentPoints(Student student, double points) {
-    	student.setPoints(points);
-    }
+//    public void setStudentPoints(Student student, double points) {
+//    	student.setPoints(points);
+//    }
     
     public Class(String groupName, int maxNumOfStudents) {
         this.maxNumOfStudents = maxNumOfStudents;
         this.groupName = groupName;
     }
 
-    void addStudent(Student student) {
+    void addStudent(Student student) throws IOException {
         if (this.studentList.contains(student)) {
-            System.out.println("Student is already in the group.");
+            System.err.println("Student already in the list");
+            throw new IOException("Student in list");
         }
         else {
             if (this.studentList.size() >= maxNumOfStudents) {
                 System.err.println("Group is full");
-                return;
+                throw new IOException("Group is full");
             }
             this.studentList.add(student);
+            Class cl = main_class.get(this.groupName);
+            ClassAttributes att = new ClassAttributes();
+//            ArrayList<Integer> l = new ArrayList<>(Arrays.asList(60, 70, 80, 90, 44, 65));
+            ArrayList<Integer> l = new ArrayList<>();
+            att.setCondition(StudentCondition.PRESENT);
+            att.setPoints(l);
+            att.calculateAverage();
+            student.addAtributes(cl, att);
         }
     }
 
-    void addPoints(Student student, double points) {
-        for (Student st: this.studentList) {
-            if (student.equals(st)) {
-                st.setPoints(points);
-                break;
-            }
-        }
+    public int getMaxNumOfStudents() {
+        return maxNumOfStudents;
     }
+    //    void addPoints(Student student, double points) {
+//        for (Student st: this.studentList) {
+//            if (student.equals(st)) {
+//                st.setPoints(points);
+//                break;
+//            }
+//        }
+//    }
 
     Student getStudent(Student student) {
         return this.studentList.get(0);
@@ -59,15 +73,6 @@ public class Class {
         for (Student st: this.studentList) {
             if (student.equals(st)) {
                 st.setCondition(condition);
-                break;
-            }
-        }
-    }
-
-    void removePoints(Student student, double points) {
-        for (Student st: this.studentList) {
-            if (student.equals(st)) {
-                st.setPoints(points);
                 break;
             }
         }
@@ -91,6 +96,15 @@ public class Class {
             }
         }
         return list;
+    }
+
+    public Student searchByEmail(String mail) {
+        for (Student st: this.studentList) {
+            if (st.getEmail().equals(mail)) {
+                return st;
+            }
+        }
+        return null;
     }
 
     int countByCondition(StudentCondition condition) {
@@ -122,22 +136,32 @@ public class Class {
         return list;
     }
 
-    ArrayList<Student> sortByPoints(ArrayList<Student> studList) {
-        ArrayList<Student> arr = (ArrayList<Student>) studList.clone();
-        arr.sort(new StudentPointsComparator());
-        return arr;
-    }
+//    ArrayList<Student> sortByPoints(ArrayList<Student> studList) {
+//        ArrayList<Student> arr = (ArrayList<Student>) studList.clone();
+//        arr.sort(new StudentPointsComparator());
+//        return arr;
+//    }
 
-    public Student max() {
-        return Collections.max(this.studentList, new StudentPointsComparator());
-    }
+//    public Student max() {
+//        return Collections.max(this.studentList, new StudentPointsComparator());
+//    }
     
     @Override
     public String toString() {
-        return "Class{" +
-                "groupName='" + groupName + '\'' +
-                ", studentList=" + studentList +
-                ", maxNumOfStudents=" + maxNumOfStudents +
-                '}';
+        return groupName;
+    }
+
+    public Student findStudentByUUID(String id) {
+        for (Student curr_student: studentList) {
+            if (curr_student.getId().equals(id)) {
+                return curr_student;
+            }
+        }
+        return null;
+    }
+
+    public void removeStudent(Student s) {
+        this.studentList.remove(s);
+
     }
 }

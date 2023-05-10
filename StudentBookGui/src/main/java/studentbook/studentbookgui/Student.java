@@ -1,21 +1,29 @@
 package studentbook.studentbookgui;
 
-import java.util.Comparator;
-import java.util.Objects;
+import javafx.scene.control.Alert;
+
+import java.util.*;
 
 public class Student implements Comparable<Student> {
+    private final String id;
     private final String name;
     private final String surname;
+    private String email;
     private StudentCondition condition;
     private final int yearOfBirth;
     private double points;
 
-    public Student(String name, String surname, StudentCondition condition, int yearOfBirth, double points) {
+    public Map<Class, ClassAttributes> attributes = new HashMap<Class, ClassAttributes>();
+
+    public Student(String name, String surname, StudentCondition condition, int yearOfBirth) {
+        this.id = UUID.randomUUID().toString();
+        this.email = surname + "@usos.com";
         this.name = name;
         this.surname = surname;
         this.condition = condition;
         this.yearOfBirth = yearOfBirth;
-        this.points = points;
+//        this.attributes;
+//        this.points = points;
     }
 
     void print() {
@@ -23,7 +31,7 @@ public class Student implements Comparable<Student> {
         System.out.println("Full name: " + name + " " + surname);
         System.out.println("Student condition: " + condition);
         System.out.println("Year of birth: " + yearOfBirth);
-        System.out.println("Gathered points: " + points);
+//        System.out.println("Gathered points: " + points);
     }
 
     @Override
@@ -44,16 +52,16 @@ public class Student implements Comparable<Student> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, condition, yearOfBirth, points);
+        return Objects.hash(name, surname, condition, yearOfBirth);
     }
 
-    public void setPoints(double points) {
-        this.points = points;
-    }
+//    public void setPoints(double points) {
+//        this.points = points;
+//    }
 
-    public double getPoints() {
-        return points;
-    }
+//    public double getPoints() {
+//        return points;
+//    }
 
     public StudentCondition getCondition() {
         return condition;
@@ -76,13 +84,37 @@ public class Student implements Comparable<Student> {
 //                ", yearOfBirth=" + yearOfBirth +
 //                ", points=" + points +
 //                '}';
-    	return name + "/" + surname + "/"  + condition + "/" + points;
+    	return name + "/" + surname + "/"  + condition + "/";
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void addAtributes(Class add_class, ClassAttributes add_attributes) {
+        if (attributes.containsKey(add_class) && attributes != null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setContentText("Class already exists");
+            alert.showAndWait();
+        }
+        else {
+            attributes.put(add_class, add_attributes);
+        }
     }
 }
 
-class StudentPointsComparator implements Comparator<Student> {
-    @Override
-    public int compare(Student st1, Student st2) {
-        return Double.compare(st1.getPoints(), st2.getPoints());
-    }
-}
+//class StudentPointsComparator implements Comparator<Student> {
+//    @Override
+//    public int compare(Student st1, Student st2) {
+//        return Double.compare(st1.getPoints(), st2.getPoints());
+//    }
+//}
