@@ -39,8 +39,14 @@
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Zatwierdź" />
-                  <TextField promptText="Wpisz ocenę" />
+                  <Button mnemonicParsing="false" onAction="#add_grade_to_student" prefHeight="25.0" prefWidth="108.0" text="Zatwierdź" />
+                  <TextField fx:id="gradeTextField" onAction="#add_grade_to_student" promptText="Wpisz ocenę" />
+                  <Separator prefHeight="15.0" prefWidth="248.0" />
+                  <Button mnemonicParsing="false" onAction="#readStudents" prefHeight="25.0" prefWidth="266.0" text="Wczytaj studentów z csv" />
+                  <Button mnemonicParsing="false" onAction="#saveStudents" prefHeight="25.0" prefWidth="255.0" text="Zapisz studentów do csv" />
+                  <Separator prefHeight="16.0" prefWidth="248.0" />
+                  <Button mnemonicParsing="false" onAction="#readClasses" prefHeight="25.0" prefWidth="266.0" text="Wczytaj klasy z csv" />
+                  <Button mnemonicParsing="false" onAction="#saveClasses" prefHeight="25.0" prefWidth="279.0" text="Zapisz klasy do csv" />
                   <Separator prefHeight="15.0" prefWidth="248.0" />
                </children>
             </VBox>

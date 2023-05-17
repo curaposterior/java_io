@@ -83,6 +83,8 @@ public class LoginController {
         Scene scene = new Scene(root);
         Stage newStage = new Stage();
         newStage.setScene(scene);
+        TeacherController contr = loader_2.getController();
+        contr.setStage(newStage);
         newStage.show();
     }
 }

@@ -2,13 +2,17 @@ package studentbook.studentbookgui;
 
 import javafx.scene.control.Alert;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Student implements Comparable<Student> {
+public class Student implements Comparable<Student>, Serializable {
+    @Export
     private final String name;
+    @Export
     private final String surname;
     private String email;
     private StudentCondition condition;
+    @Export
     private int yearOfBirth;
 
     public Map<Class, ClassAttributes> attributes = new HashMap<Class, ClassAttributes>();
@@ -64,6 +68,10 @@ public class Student implements Comparable<Student> {
 
     public StudentCondition getCondition() {
         return condition;
+    }
+
+    public int getYearOfBirth() {
+        return yearOfBirth;
     }
 
     public void setCondition(StudentCondition condition) {

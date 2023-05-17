@@ -1,8 +1,9 @@
 package studentbook.studentbookgui;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ClassAttributes {
+public class ClassAttributes implements Serializable {
     private int average;
     private ArrayList<Integer> points = new ArrayList<>();
     private StudentCondition condition = StudentCondition.PRESENT;

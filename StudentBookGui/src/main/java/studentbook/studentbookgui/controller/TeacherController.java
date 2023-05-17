@@ -8,26 +8,27 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import studentbook.studentbookgui.*;
 import studentbook.studentbookgui.Class;
-import studentbook.studentbookgui.StartApplication;
-import studentbook.studentbookgui.Student;
-import studentbook.studentbookgui.StudentCondition;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static studentbook.studentbookgui.StartApplication.main;
 import static studentbook.studentbookgui.StartApplication.main_class;
 
 public class TeacherController {
     private Stage stage;
     private Scene scene;
     private FXMLLoader root;
+
+    @FXML
+    private TextField gradeTextField;
 
     @FXML
     private Button btnLogout;
@@ -38,11 +39,24 @@ public class TeacherController {
     @FXML
     private ListView<String> listStudents;
 
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
     public void switchToMainScene(ActionEvent event) throws IOException {
-        root = new FXMLLoader(StartApplication.class.getResource("MainScene.fxml"));
-        scene = new Scene(root.load());
+//        root = new FXMLLoader(StartApplication.class.getResource("MainScene.fxml"));
+//        scene = new Scene(root.load());
+//        stage.close();
+//        StartApplication.main_stage.setScene(scene);
         stage.close();
-        StartApplication.main_stage.setScene(scene);
+    }
+
+    public void add_grade_to_student() {
+        try {
+            // do sth
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
     }
 
     public void showGroups(ActionEvent event) {
@@ -78,6 +92,66 @@ public class TeacherController {
 
                 listStudents.setItems(studentItems);
             }
+        }
+    }
+
+    @FXML
+    public void readClasses() {
+        try {
+            List<Class> cl = ParseCSV.readClassesFromCSV();
+            for (Class c : cl) {
+                if (!main_class.getGroups().containsKey(c.getGroupName())) {
+                    main_class.addClass(c.getGroupName(), c.getMaxNumOfStudents());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    @FXML
+    public void saveClasses() throws IOException {
+        try {
+            ParseCSV.saveClassesToCSV(main_class.getGroupsArray());
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    @FXML
+    public void readStudents() throws IOException {
+        try {
+            if (listGroups.getSelectionModel().getSelectedItem() != null) {
+                String gr_name = listGroups.getSelectionModel().getSelectedItem();
+                List<Student> students = ParseCSV.readStudentsFromCSV();
+                for (Student st : students) {
+                    main_class.addStudent(gr_name, st);
+                }
+            } else {
+                Alert a = new Alert(Alert.AlertType.WARNING);
+                a.setTitle("Zły wybór");
+                a.setContentText("Wybierz przedmiot, do którego chcesz wczytać studentów");
+                a.show();
+            }
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+    }
+
+    @FXML
+    public void saveStudents() throws IOException {
+        try {
+            if (listGroups.getSelectionModel().getSelectedItem() != null) {
+                String gr_name = listGroups.getSelectionModel().getSelectedItem();
+                ParseCSV.saveStudensToCSV(main_class.get(gr_name).getStudentList());
+            } else {
+                Alert a = new Alert(Alert.AlertType.WARNING);
+                a.setTitle("Zły wybór");
+                a.setContentText("Wybierz przedmiot, z którego chcesz zapisać studentów");
+                a.show();
+            }
+        } catch (Exception e) {
+            System.err.println(e.toString());
         }
     }
 }

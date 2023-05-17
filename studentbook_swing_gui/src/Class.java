@@ -1,17 +1,11 @@
 package studentbook.studentbookgui;
 
-import java.io.IOException;
-import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.*;
 
-import static studentbook.studentbookgui.StartApplication.main_class;
-
-public class Class implements Serializable {
-
-    @Export
+public class Class {
     String groupName;
     ArrayList<Student> studentList = new ArrayList<Student>();
-    @Export
     int maxNumOfStudents;
 
     public ArrayList<Student> getStudentList() {
@@ -26,47 +20,36 @@ public class Class implements Serializable {
     	this.maxNumOfStudents = newMax;
     }
     
-//    public void setStudentPoints(Student student, double points) {
-//    	student.setPoints(points);
-//    }
+    public void setStudentPoints(Student student, double points) {
+    	student.setPoints(points);
+    }
     
     public Class(String groupName, int maxNumOfStudents) {
         this.maxNumOfStudents = maxNumOfStudents;
         this.groupName = groupName;
     }
 
-    void addStudent(Student student) throws IOException {
+    void addStudent(Student student) {
         if (this.studentList.contains(student)) {
-            System.err.println("Student already in the list");
-            throw new IOException("Student in list");
+            System.out.println("Student is already in the group.");
         }
         else {
             if (this.studentList.size() >= maxNumOfStudents) {
                 System.err.println("Group is full");
-                throw new IOException("Group is full");
+                return;
             }
             this.studentList.add(student);
-            Class cl = main_class.get(this.groupName);
-            ClassAttributes att = new ClassAttributes();
-//            ArrayList<Integer> l = new ArrayList<>(Arrays.asList(60, 70, 80, 90, 44, 65));
-            att.addGrade(10);
-            att.setCondition(StudentCondition.PRESENT);
-            att.calculateAverage();
-            student.addAtributes(cl, att);
         }
     }
 
-    public int getMaxNumOfStudents() {
-        return maxNumOfStudents;
+    void addPoints(Student student, double points) {
+        for (Student st: this.studentList) {
+            if (student.equals(st)) {
+                st.setPoints(points);
+                break;
+            }
+        }
     }
-    //    void addPoints(Student student, double points) {
-//        for (Student st: this.studentList) {
-//            if (student.equals(st)) {
-//                st.setPoints(points);
-//                break;
-//            }
-//        }
-//    }
 
     Student getStudent(Student student) {
         return this.studentList.get(0);
@@ -76,6 +59,15 @@ public class Class implements Serializable {
         for (Student st: this.studentList) {
             if (student.equals(st)) {
                 st.setCondition(condition);
+                break;
+            }
+        }
+    }
+
+    void removePoints(Student student, double points) {
+        for (Student st: this.studentList) {
+            if (student.equals(st)) {
+                st.setPoints(points);
                 break;
             }
         }
@@ -99,15 +91,6 @@ public class Class implements Serializable {
             }
         }
         return list;
-    }
-
-    public Student searchByEmail(String mail) {
-        for (Student st: this.studentList) {
-            if (st.getEmail().equals(mail)) {
-                return st;
-            }
-        }
-        return null;
     }
 
     int countByCondition(StudentCondition condition) {
@@ -139,23 +122,22 @@ public class Class implements Serializable {
         return list;
     }
 
-//    ArrayList<Student> sortByPoints(ArrayList<Student> studList) {
-//        ArrayList<Student> arr = (ArrayList<Student>) studList.clone();
-//        arr.sort(new StudentPointsComparator());
-//        return arr;
-//    }
+    ArrayList<Student> sortByPoints(ArrayList<Student> studList) {
+        ArrayList<Student> arr = (ArrayList<Student>) studList.clone();
+        arr.sort(new StudentPointsComparator());
+        return arr;
+    }
 
-//    public Student max() {
-//        return Collections.max(this.studentList, new StudentPointsComparator());
-//    }
+    public Student max() {
+        return Collections.max(this.studentList, new StudentPointsComparator());
+    }
     
     @Override
     public String toString() {
-        return groupName;
-    }
-
-    public void removeStudent(Student s) {
-        this.studentList.remove(s);
-
+        return "Class{" +
+                "groupName='" + groupName + '\'' +
+                ", studentList=" + studentList +
+                ", maxNumOfStudents=" + maxNumOfStudents +
+                '}';
     }
 }
