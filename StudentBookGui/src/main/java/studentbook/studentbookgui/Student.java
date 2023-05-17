@@ -5,25 +5,20 @@ import javafx.scene.control.Alert;
 import java.util.*;
 
 public class Student implements Comparable<Student> {
-    private final String id;
     private final String name;
     private final String surname;
     private String email;
     private StudentCondition condition;
-    private final int yearOfBirth;
-    private double points;
+    private int yearOfBirth;
 
     public Map<Class, ClassAttributes> attributes = new HashMap<Class, ClassAttributes>();
 
     public Student(String name, String surname, StudentCondition condition, int yearOfBirth) {
-        this.id = UUID.randomUUID().toString();
         this.email = surname + "@usos.com";
         this.name = name;
         this.surname = surname;
         this.condition = condition;
         this.yearOfBirth = yearOfBirth;
-//        this.attributes;
-//        this.points = points;
     }
 
     void print() {
@@ -31,7 +26,19 @@ public class Student implements Comparable<Student> {
         System.out.println("Full name: " + name + " " + surname);
         System.out.println("Student condition: " + condition);
         System.out.println("Year of birth: " + yearOfBirth);
-//        System.out.println("Gathered points: " + points);
+    }
+
+    public void addGrade(String grName, int grade) {
+        try {
+            if (attributes.containsKey(grName)) {
+                attributes.get(grName).addGrade(grade);
+            }
+            else {
+                System.err.println("You are not signed up for this course");
+            }
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
     }
 
     @Override
@@ -44,7 +51,7 @@ public class Student implements Comparable<Student> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return yearOfBirth == student.yearOfBirth && Double.compare(student.points, points) == 0
+        return yearOfBirth == student.yearOfBirth
                 && Objects.equals(name, student.name)
                 && Objects.equals(surname, student.surname)
                 && condition == student.condition;
@@ -55,20 +62,16 @@ public class Student implements Comparable<Student> {
         return Objects.hash(name, surname, condition, yearOfBirth);
     }
 
-//    public void setPoints(double points) {
-//        this.points = points;
-//    }
-
-//    public double getPoints() {
-//        return points;
-//    }
-
     public StudentCondition getCondition() {
         return condition;
     }
 
     public void setCondition(StudentCondition condition) {
         this.condition = condition;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getSurname() {
@@ -87,16 +90,16 @@ public class Student implements Comparable<Student> {
     	return name + "/" + surname + "/"  + condition + "/";
     }
 
-    public String getId() {
-        return id;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
 
     public String getEmail() {
         return this.email;
+    }
+
+    public void setYearOfBirth(int yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
     }
 
     public void addAtributes(Class add_class, ClassAttributes add_attributes) {
@@ -111,10 +114,3 @@ public class Student implements Comparable<Student> {
         }
     }
 }
-
-//class StudentPointsComparator implements Comparator<Student> {
-//    @Override
-//    public int compare(Student st1, Student st2) {
-//        return Double.compare(st1.getPoints(), st2.getPoints());
-//    }
-//}

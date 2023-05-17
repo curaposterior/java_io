@@ -1,15 +1,18 @@
 package studentbook.studentbookgui;
 
+import studentbook.studentbookgui.controller.StudentController;
+
 public class DisplayClassForStudent {
     private String groupName;
     private String grades;
     private Integer average;
     private StudentCondition condition;
 
-    public DisplayClassForStudent(String groupName, String grades, Integer average) {
+    public DisplayClassForStudent(String groupName, String grades, Integer average, StudentCondition condition) {
         this.groupName = groupName;
         this.grades = grades;
         this.average = average;
+        this.condition = condition;
     }
     public StudentCondition getCondition() {
         return condition;

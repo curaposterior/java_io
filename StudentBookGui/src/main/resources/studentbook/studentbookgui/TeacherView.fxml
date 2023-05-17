@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studentbook.studentbookgui.controller.TeacherController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="502.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studentbook.studentbookgui.controller.TeacherController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <top>
@@ -23,14 +23,27 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button mnemonicParsing="false" onAction="#switchToMainScene" prefHeight="25.0" prefWidth="89.0" text="Wyloguj się" GridPane.columnIndex="5" />
-                        <ComboBox prefWidth="150.0" />
+                        <Button mnemonicParsing="false" onAction="#switchToMainScene" prefHeight="25.0" prefWidth="89.0" text="Wyloguj się" GridPane.columnIndex="3" />
+                        <Button fx:id="showClassesbtn" mnemonicParsing="false" onAction="#showGroups" prefHeight="43.0" prefWidth="84.0" text="Wyświetl przedmioty" wrapText="true" />
                      </children>
                   </GridPane>
+                  <Label alignment="CENTER" prefHeight="44.0" prefWidth="116.0" text="lista studentów" />
                </children></HBox>
          </top>
          <left>
-            <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-         </left></BorderPane>
+            <ListView fx:id="listGroups" onMouseClicked="#showStudents" prefHeight="300.0" prefWidth="215.0" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <ListView fx:id="listStudents" prefHeight="402.0" prefWidth="322.0" BorderPane.alignment="CENTER" />
+         </right>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Zatwierdź" />
+                  <TextField promptText="Wpisz ocenę" />
+                  <Separator prefHeight="15.0" prefWidth="248.0" />
+               </children>
+            </VBox>
+         </center></BorderPane>
    </children>
 </StackPane>

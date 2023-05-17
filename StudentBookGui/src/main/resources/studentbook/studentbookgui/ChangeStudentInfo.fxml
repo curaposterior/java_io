@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="415.0" prefWidth="319.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studentbook.studentbookgui.controller.ChangeStudentInfoController">
+   <children>
+      <Label alignment="CENTER" prefHeight="40.0" prefWidth="319.0" text="Zmień swoje dane" />
+      <Separator prefHeight="24.0" prefWidth="319.0" />
+      <TextField fx:id="changeEmailField" promptText="Email" />
+      <Separator prefHeight="21.0" prefWidth="319.0" />
+      <ComboBox fx:id="conditonComboBox" prefHeight="25.0" prefWidth="148.0" promptText="Stan studenta" style="-fx-alignment: center;" />
+      <Separator prefHeight="104.0" prefWidth="319.0" />
+      <HBox prefHeight="129.0" prefWidth="319.0">
+         <children>
+            <Button fx:id="cancelInformation" mnemonicParsing="false" onAction="#cancel" prefHeight="25.0" prefWidth="138.0" text="Anuluj" />
+            <Separator orientation="VERTICAL" prefHeight="129.0" prefWidth="49.0" />
+            <Button fx:id="acceptInformation" mnemonicParsing="false" onAction="#accept" prefHeight="25.0" prefWidth="150.0" text="Zatwierdź" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

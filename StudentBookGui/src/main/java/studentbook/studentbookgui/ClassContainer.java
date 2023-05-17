@@ -1,13 +1,14 @@
 package studentbook.studentbookgui;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class ClassContainer {
+public class ClassContainer implements Serializable {
     private Map<String, Class> groups = new HashMap<String, Class>();
 
     public Map<String, Class> getGroups() {
@@ -103,6 +104,18 @@ public class ClassContainer {
             }
         }
         return to_ret;
+    }
+
+    public boolean checkEmail(String mail) {
+        for (Class c: groups.values()) {
+            for (Student s: c.getStudentList()) {
+                if (s.getEmail().equals(mail)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     @Override

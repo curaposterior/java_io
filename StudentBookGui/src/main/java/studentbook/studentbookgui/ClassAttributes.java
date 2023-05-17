@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class ClassAttributes {
     private int average;
-    private ArrayList<Integer> points;
-    private StudentCondition condition;
+    private ArrayList<Integer> points = new ArrayList<>();
+    private StudentCondition condition = StudentCondition.PRESENT;
 
     public void setAverage(int average) {
         this.average = average;
     }
 
-    public void addGrade(Integer grade) {
+    public void addGrade(int grade) {
         getPoints().add(grade);
         calculateAverage();
     }

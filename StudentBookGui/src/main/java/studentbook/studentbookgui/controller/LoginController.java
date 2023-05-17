@@ -64,11 +64,13 @@ public class LoginController {
         String mail = user_login.getText();
         if (!Objects.equals(mail, "")) {
             StudentController contr = loader.getController();
-//            contr.displayEmail(mail);
-            contr.displayEmail("Test1@usos.com");
+
+            contr.displayEmail(mail);
+//            contr.displayEmail();
             scene = new Scene(root);
 //            StartApplication.main_stage.setScene(scene);
             newStage.setScene(scene);
+            contr.setStage(newStage);
             newStage.show();
         }
     }

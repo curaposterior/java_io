@@ -31,9 +31,12 @@ public class StudentController {
     private Scene scene;
     private FXMLLoader root;
 
-    private Student curr_student;
+    public static Student curr_student;
     @FXML
     private Label labelDisplayMail;
+
+    @FXML
+    private TextField searchClasses;
 
     @FXML
     private Button btnLogout;
@@ -57,10 +60,20 @@ public class StudentController {
     private TableColumn<DisplayClassForStudent, Integer> averageColumn;
 
     @FXML
+    private TableColumn<DisplayClassForStudent, StudentCondition> conditionColumn;
+
+    @FXML
     private ListView<String> listViewCourses;
 
     @FXML
     private ProgressBar progressBar;
+
+    @FXML
+    private Tooltip capacityTooltip;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
     public void showCapacity() {
         String selectedGroup = listViewCourses.getSelectionModel().getSelectedItem();
@@ -69,12 +82,67 @@ public class StudentController {
             Class c = main_class.get(name);
             double capacity = (double) c.getStudentList().size() / c.getMaxNumOfStudents();
             progressBar.setProgress(capacity);
+
+
+            //System.out.println(prettySummary(test));
+            capacityTooltip = new Tooltip();
+            String output = "Pojemność: " + String.valueOf(main_class.get(selectedGroup).getStudentList().size() /
+                    main_class.get(selectedGroup).getMaxNumOfStudents() * 100);
+            capacityTooltip.setText(output);
+        }
+    }
+
+    @FXML
+    public void showStudentClasses(ActionEvent event) throws IOException {
+        String mail = labelDisplayMail.getText();
+        tableVStudentClasses.getItems().clear();
+        for (Class search_class: main_class.getGroups().values()) {
+            Student st = search_class.searchByEmail(mail);
+            if (st != null) {
+                curr_student = st;
+            }
+        }
+        if (curr_student != null) {
+            groupNameColumn.setCellValueFactory(new PropertyValueFactory<>("groupName"));
+            gradeColumn.setCellValueFactory(new PropertyValueFactory<>("grades"));
+            averageColumn.setCellValueFactory(new PropertyValueFactory<>("average"));
+            conditionColumn.setCellValueFactory(new PropertyValueFactory<>("condition"));
+
+//            DisplayClassForStudent ob = new DisplayClassForStudent(curr_student.attributes.get(),
+//                                                                    )
+            for (Map.Entry<Class, ClassAttributes> entry: curr_student.attributes.entrySet()) {
+                Class key = entry.getKey();
+                ClassAttributes val = entry.getValue();
+                DisplayClassForStudent ob = new DisplayClassForStudent(
+                        key.getGroupName(),
+                        val.getGrades(),
+                        val.getAverage(),
+                        val.getCondition()
+                );
+                tableVStudentClasses.getItems().add(ob);
+            }
         }
     }
 
     @FXML
     public void searchClasses(ActionEvent event) {
-
+        if (searchClasses.getText() != null && curr_student != null) {
+            String txt = searchClasses.getText();
+            tableVStudentClasses.getItems().clear();
+            for (Map.Entry<Class, ClassAttributes> entry: curr_student.attributes.entrySet()) {
+                Class key = entry.getKey();
+                ClassAttributes val = entry.getValue();
+                if (key.getGroupName().contains(txt)) {
+                    DisplayClassForStudent ob = new DisplayClassForStudent(
+                            key.getGroupName(),
+                            val.getGrades(),
+                            val.getAverage(),
+                            val.getCondition()
+                    );
+                    tableVStudentClasses.getItems().add(ob);
+                }
+            }
+        }
     }
 
     @FXML
@@ -115,41 +183,37 @@ public class StudentController {
 
     @FXML
     public void switchToMainScene(ActionEvent event) throws IOException {
-        root = new FXMLLoader(StartApplication.class.getResource("MainScene.fxml"));
-        scene = new Scene(root.load());
-        StartApplication.main_stage.setScene(scene);
+//        root = new FXMLLoader(StartApplication.class.getResource("MainScene.fxml"));
+//        scene = new Scene(root.load());
+//        StartApplication.main_stage.setScene(scene);
+        stage.close();
     }
+
 
     @FXML
-    public void showStudentClasses(ActionEvent event) throws IOException {
-        String mail = labelDisplayMail.getText();
-        tableVStudentClasses.getItems().clear();
-        for (Class search_class: main_class.getGroups().values()) {
-            Student st = search_class.searchByEmail(mail);
-            if (st != null) {
-                curr_student = st;
-            }
-        }
-        if (curr_student != null) {
-            groupNameColumn.setCellValueFactory(new PropertyValueFactory<>("groupName"));
-            gradeColumn.setCellValueFactory(new PropertyValueFactory<>("grades"));
-            averageColumn.setCellValueFactory(new PropertyValueFactory<>("average"));
+    void changeStudentInformation(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(StartApplication.class.getResource("ChangeStudentInfo.fxml"));
+        Parent root = loader.load();
 
-//            DisplayClassForStudent ob = new DisplayClassForStudent(curr_student.attributes.get(),
-//                                                                    )
-            for (Map.Entry<Class, ClassAttributes> entry: curr_student.attributes.entrySet()) {
-                Class key = entry.getKey();
-                ClassAttributes val = entry.getValue();
-                DisplayClassForStudent ob = new DisplayClassForStudent(
-                        key.getGroupName(),
-                        val.getGrades(),
-                        val.getAverage()
-                );
-                tableVStudentClasses.getItems().add(ob);
-            }
-        }
+        ChangeStudentInfoController changeStudentInfoController = loader.getController();
+        changeStudentInfoController.setStudentController(this);
+        changeStudentInfoController.setStudent(curr_student);
+        changeStudentInfoController.populate(curr_student);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+//        FXMLLoader change_info_loader = new FXMLLoader(StartApplication.class.getResource("ChangeStudentInfo.fxml"));
+//        Parent root = change_info_loader.load();
+//        ChangeStudentInfoController contr = change_info_loader.getController();
+//
+//        Stage newStage = new Stage();
+//        Scene newScene = new Scene(root);
+//        newStage.setScene(newScene);
+//        contr.setStage(newStage);
+//        contr.populate(curr_student);
+//        contr.setStudent(curr_student);
+//        newStage.show();
     }
-
     @FXML
     void showCourses(ActionEvent event) {
         List<Class> ls = main_class.getGroupsArray();
@@ -166,4 +230,9 @@ public class StudentController {
         labelDisplayMail.setText(email);
     }
 
+
+    public void updateCurrentStudent(Student student) {
+        curr_student = student;
+        displayEmail(student.getEmail());
+    }
 }

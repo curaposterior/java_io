@@ -45,9 +45,8 @@ public class Class {
             Class cl = main_class.get(this.groupName);
             ClassAttributes att = new ClassAttributes();
 //            ArrayList<Integer> l = new ArrayList<>(Arrays.asList(60, 70, 80, 90, 44, 65));
-            ArrayList<Integer> l = new ArrayList<>();
+            att.addGrade(10);
             att.setCondition(StudentCondition.PRESENT);
-            att.setPoints(l);
             att.calculateAverage();
             student.addAtributes(cl, att);
         }
@@ -149,15 +148,6 @@ public class Class {
     @Override
     public String toString() {
         return groupName;
-    }
-
-    public Student findStudentByUUID(String id) {
-        for (Student curr_student: studentList) {
-            if (curr_student.getId().equals(id)) {
-                return curr_student;
-            }
-        }
-        return null;
     }
 
     public void removeStudent(Student s) {
