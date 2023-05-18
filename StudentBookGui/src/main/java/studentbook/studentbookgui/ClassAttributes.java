@@ -5,8 +5,12 @@ import java.util.ArrayList;
 
 public class ClassAttributes implements Serializable {
     private int average;
-    private ArrayList<Integer> points = new ArrayList<>();
+    public ArrayList<Integer> points = new ArrayList<>();
     private StudentCondition condition = StudentCondition.PRESENT;
+
+    public ClassAttributes(ArrayList<Integer> points) {
+        this.points = points;
+    }
 
     public void setAverage(int average) {
         this.average = average;

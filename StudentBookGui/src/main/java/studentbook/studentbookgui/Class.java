@@ -47,7 +47,7 @@ public class Class implements Serializable {
             }
             this.studentList.add(student);
             Class cl = main_class.get(this.groupName);
-            ClassAttributes att = new ClassAttributes();
+            ClassAttributes att = new ClassAttributes(new ArrayList<>());
 //            ArrayList<Integer> l = new ArrayList<>(Arrays.asList(60, 70, 80, 90, 44, 65));
             att.addGrade(10);
             att.setCondition(StudentCondition.PRESENT);

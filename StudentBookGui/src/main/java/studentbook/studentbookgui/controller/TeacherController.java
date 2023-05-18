@@ -17,6 +17,7 @@ import studentbook.studentbookgui.Class;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static studentbook.studentbookgui.StartApplication.main;
@@ -51,13 +52,26 @@ public class TeacherController {
         stage.close();
     }
 
-    public void add_grade_to_student() {
-        try {
-            // do sth
-        } catch (Exception e) {
-            System.err.println(e.toString());
-        }
-    }
+//    public void add_grade_to_student() {
+//        try {
+//            if (listGroups.getSelectionModel().getSelectedItem() != null &&
+//                listStudents.getSelectionModel().getSelectedItem() != null &&
+//                !gradeTextField.getText().equals("")) {
+//                String gr_name = listGroups.getSelectionModel().getSelectedItem();
+//                String surname = listStudents.getSelectionModel().getSelectedItem().split("/")[0].strip();
+//                Integer grad = Integer.parseInt(gradeTextField.getText());
+//                System.out.println(gr_name + "," + surname + "," + grad);
+//                try {
+//                    main_class.get(gr_name).searchByEmail(surname + "@usos.com").attributes.get(gr_name).points.add(grad);
+//                } catch (Exception ee) {
+//                    main_class.get(gr_name).searchByEmail(surname + "@usos.com").attributes = new HashMap<>();
+//                    main_class.get(gr_name).searchByEmail(surname + "@usos.com").addGrade(gr_name, grad);
+//                }
+//            }
+//        } catch (Exception e) {
+//            System.err.println(e.toString());
+//        }
+//    }
 
     public void showGroups(ActionEvent event) {
         List<Class> c = main_class.getGroupsArray();

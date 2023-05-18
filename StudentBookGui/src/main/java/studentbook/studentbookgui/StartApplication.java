@@ -24,32 +24,10 @@ public class StartApplication extends Application {
     public void start(Stage stage) throws IOException, ClassNotFoundException, FileNotFoundException {
 //        try {
 //            //example data
-//            ArrayList<Student> studentListAddToClassContainer = new ArrayList<Student>();
-//            studentListAddToClassContainer.add(new Student("Test1", "Test1", StudentCondition.ABSENT,
-//                    1997));
-//            studentListAddToClassContainer.add(new Student("Test3", "Test3", StudentCondition.ABSENT,
-//                    2001));
-//            studentListAddToClassContainer.add(new Student("Test4", "Test4", StudentCondition.ABSENT,
-//                    1998));
-//            studentListAddToClassContainer.add(new Student("Test2", "Test2", StudentCondition.ABSENT,
-//                    2002));
-//            main_class = new ClassContainer();
-//            main_class.addClass("Podstawy Programowania", 5);
-//            main_class.addClass("Programowanie Równoległe", 5);
-//            main_class.addClass("Modelowanie matematyczne", 5);
-//            main_class.addClass("Analiza matematyczna", 1);
-//            main_class.addClass("Geometria Obliczeniowa", 1);
 //
-//            for (Student st: studentListAddToClassContainer) {
-//                main_class.get("Modelowanie matematyczne").addStudent(st);
-//                main_class.get("Programowanie Równoległe").addStudent(st);
-//            }
-//
-//
-//
-////            test1.addGrade("Modelowanie matematyczne", 60);
-//            main_class.get("Modelowanie matematyczne").getStudentList().get(0)
-//                    .addGrade("Modelowanie matematyczne", 10);
+//            loaddata();
+
+
             try {
                 main_class = ClassContainerSerialization.load();
             } catch (Exception e) {
@@ -59,6 +37,7 @@ public class StartApplication extends Application {
                 al.setContentText("Wczytywanie danych zakończyło się niepowodzeniem. Plik nie został znaleziony");
                 al.show();
             }
+
             stage.setTitle("Login");
             main_stage = stage;
             FXMLLoader root = new FXMLLoader(StartApplication.class.getResource("MainScene.fxml"));
@@ -92,6 +71,35 @@ public class StartApplication extends Application {
 //            ParseCSV.saveStudensToCSV(main_class.getGroups().get("Modelowanie matematyczne").getStudentList());
 //            ParseCSV.saveClassesToCSV(main_class.getGroupsArray());
         }
+    }
+
+    public void loaddata() throws IOException {
+        ArrayList<Student> studentListAddToClassContainer = new ArrayList<Student>();
+            studentListAddToClassContainer.add(new Student("Test1", "Test1", StudentCondition.ABSENT,
+                    1997));
+            studentListAddToClassContainer.add(new Student("Test3", "Test3", StudentCondition.ABSENT,
+                    2001));
+            studentListAddToClassContainer.add(new Student("Test4", "Test4", StudentCondition.ABSENT,
+                    1998));
+            studentListAddToClassContainer.add(new Student("Test2", "Test2", StudentCondition.ABSENT,
+                    2002));
+            main_class = new ClassContainer();
+            main_class.addClass("Podstawy Programowania", 5);
+            main_class.addClass("Programowanie Równoległe", 5);
+            main_class.addClass("Modelowanie matematyczne", 5);
+            main_class.addClass("Analiza matematyczna", 1);
+            main_class.addClass("Geometria Obliczeniowa", 1);
+
+            for (Student st: studentListAddToClassContainer) {
+                main_class.get("Modelowanie matematyczne").addStudent(st);
+                main_class.get("Programowanie Równoległe").addStudent(st);
+            }
+
+
+
+//            test1.addGrade("Modelowanie matematyczne", 60);
+            main_class.get("Modelowanie matematyczne").getStudentList().get(0)
+                    .addGrade("Modelowanie matematyczne", 10);
     }
 
     public static void main(String[] args) {
